@@ -41,6 +41,13 @@ body {
   margin: 4px 0;
 }
 
+.OrderItem.None {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px 0;
+}
+
 
 
 

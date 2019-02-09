@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import ItemsForm from './Components/ItemsForm/ItemsForm';
 import Order from './Components/Order/Order';
+import TotalPrice from './Components/Order/TotalPrice/TotalPrice';
 
 const availableItems = [
   {name: 'hamburger', price: 80, label: 'Hamburger'},
@@ -27,7 +28,7 @@ class App extends Component {
 
   addItem = (name) => {
       const newItem = this.state.items.map(currentItem => {
-          if (currentItem.name === name){
+          if (currentItem.name === name) {
               currentItem.count += 1;
               let price = availableItems.find(item => item.name === currentItem.name).price;
               currentItem.total = currentItem.count * price;
@@ -35,6 +36,7 @@ class App extends Component {
           return currentItem;
       });
       this.setState({items: newItem});
+      this.countTotalPrice();
   };
 
   removeItem = (name) => {
@@ -47,16 +49,21 @@ class App extends Component {
           return currentItem;
       });
       this.setState({items: newItem});
-  };  
+      this.countTotalPrice();
+  }; 
 
-
-
+  countTotalPrice = () => {
+    let items = [...this.state.items];
+    let totalPrice = items.reduce((sum, item) => sum + item.total, 0);
+    this.setState({totalPrice: totalPrice});
+  }
 
   render() {
     return (
       <div className="Container">
           <ItemsForm items={availableItems} addItem={this.addItem}/>
           <Order items={this.state.items} removeItem={this.removeItem}/>
+          <TotalPrice totalPrice={this.state.totalPrice}/>
       </div>
     );
   }
