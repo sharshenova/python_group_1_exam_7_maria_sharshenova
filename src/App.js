@@ -58,11 +58,16 @@ class App extends Component {
     this.setState({totalPrice: totalPrice});
   }
 
+  getLabel = (name) => {
+    let label = availableItems.find(item => item.name === name).label;
+    return label;
+  };
+
   render() {
     return (
       <div className="Container">
           <ItemsForm items={availableItems} addItem={this.addItem}/>
-          <Order items={this.state.items} removeItem={this.removeItem}/>
+          <Order items={this.state.items} removeItem={this.removeItem} label={this.getLabel}/>
           <TotalPrice totalPrice={this.state.totalPrice}/>
       </div>
     );

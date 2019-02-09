@@ -4,7 +4,7 @@ function TotalPrice (props) {
 
     return (
         <div className="TotalPrice">
-            <h3>Total Price: {props.totalPrice}</h3>
+            <h3>Total Price: {props.totalPrice} KGS</h3>
         </div>
     )
 }
