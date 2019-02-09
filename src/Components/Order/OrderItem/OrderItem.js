@@ -4,7 +4,8 @@ import React from 'react';
 function OrderItem (props) {
     return(
         <div className="OrderItem">
-            <button>{props.name}: {props.count} X {props.total}</button>
+            <h3>{props.name}: {props.count} X {props.total} </h3>
+            <button onClick={props.removeItem}>Delete</button>
         </div>
     );
 }

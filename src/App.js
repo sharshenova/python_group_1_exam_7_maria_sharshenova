@@ -25,13 +25,38 @@ class App extends Component {
     totalPrice: 0
   };
 
+  addItem = (name) => {
+      const newItem = this.state.items.map(currentItem => {
+          if (currentItem.name === name){
+              currentItem.count += 1;
+              let price = availableItems.find(item => item.name === currentItem.name).price;
+              currentItem.total = currentItem.count * price;
+          }
+          return currentItem;
+      });
+      this.setState({items: newItem});
+  };
+
+  removeItem = (name) => {
+      const newItem = this.state.items.map(currentItem => {
+          if (currentItem.name === name){
+              currentItem.count -= 1;
+              let price = availableItems.find(item => item.name === currentItem.name).price;
+              currentItem.total = currentItem.count * price;
+          }
+          return currentItem;
+      });
+      this.setState({items: newItem});
+  };  
+
+
 
 
   render() {
     return (
       <div className="Container">
-          <ItemsForm items={availableItems}/>
-          <Order items={this.state.items}  />
+          <ItemsForm items={availableItems} addItem={this.addItem}/>
+          <Order items={this.state.items} removeItem={this.removeItem}/>
       </div>
     );
   }
